@@ -39,14 +39,14 @@ function verificar()
 
   if (numeroingresado < numeroSecreto) {
    
-    document.getElementById("intentos").value = contadorIntentos++;
+    document.getElementById("intentos").value = contadorIntentos ++;
     alert("falta...");
 
   }else{
 
   if (numeroingresado > numeroSecreto){
     
-    document.getElementById("intentos").value = contadorIntentos++;
+    document.getElementById("intentos").value = contadorIntentos ++;
     alert("Se paso...");
 
   }else{
