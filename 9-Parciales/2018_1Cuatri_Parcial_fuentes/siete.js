@@ -34,12 +34,13 @@ function mostrar()
       }
        // punto a
     acumuladordenotas += notas;
+    parseInt(acumuladordenotas);
 
     // punto B
     if (contadoralum == 1) {
         notamasbaja = notas;
     } else {
-        if (nota < notamasbaja) {
+        if (notas < notamasbaja) {
             notamasbaja == notas;  
             sexonotabaja == sexo;  // esta nota y este sexo pertenece a la misma consigna
         }
@@ -47,6 +48,7 @@ function mostrar()
         contadordevarones++;
             //punto C contador de notas
     } promediodenotas = acumuladordenotas / notas;
+     
 
     alert("el promedio de notas es " + promediodenotas);
  }
