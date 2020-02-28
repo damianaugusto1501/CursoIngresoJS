@@ -5,87 +5,83 @@
 function mostrar()
 
 {
+ var respuesta;
+ var marca;
+ var peso;
+ var acumuladorDePeso = 0;
+ var ContadorDePesos = 0;
+ var temperatura ;
+ var tempPar = 0 ;
+ var primeravez = true;
+ var pesoDeMarca;
+ var pesoMinimo;
+ var pesoMaximo;
+ var productosACero = 0;
+ var promedioPesoProd;
+ 
 
-    var peso;
-    var temperatura;
-    var marca;
-    var respuesta;
-    var CantTempPares = 0;
-    var marcaMax;
-    var bandera = true;
-    var pesoMax;
-    var pesoMin;
-    var CantDeProdBajoCero = 0;
-    var promedioPeso;
-    var CantPeso = 0;
-    var acumuladorPeso = 0;
-    do {
 
-        do {
-            marca = prompt("ingrese la marca");
-        } while (!isNaN(marca));
 
-        do {
-            peso = prompt("ingrese el peso");
-            peso = parseInt(peso);
+ do {     
+     do {
+         peso =prompt("ingrese un peso entre 1 y 100");
+         peso =parseInt(peso);
+      
+        }while(isNaN(peso) ||peso <1 || peso >100);
+
+
+     do {
+         temperatura = prompt("ingrese temperatura entre -30 y 30");
+         
+         
+        }while (isNaN(temperatura) || temperatura < -30 || temperatura > 30);
+
+         do {
+             marca = prompt("ingrese la marca porfavor");
+            }while (!isNaN(marca || marca == ""));
+
+            if (temperatura % 2 == 0){
+                tempPar ++;
+            }
+            if (peso > 0){
+                acumuladorDePeso += peso;
+                ContadorDePesos ++;
+            }
+
+            if (primeravez){
+                primeravez = false;
+                pesoMaximo = peso;
+                pesoMinimo = peso;
+                pesoDeMarca = marca;
+
+            } if(peso > pesoMaximo){
+                pesoMaximo = peso;
+                pesoDeMarca = marca;
+
+            } else {
+                if (peso < pesoMinimo){
+                    pesoMinimo = peso;
+                }
+            }
+            if (temperatura < 0){
+                productosACero ++;
+
+            }
+
             
+     respuesta = confirm("desea agregar mas?");
 
-        } while (isNaN(peso) || peso < 1 || peso > 100);
+   } while (respuesta == true);
 
-        do {
-            temperatura = prompt("ingrese la temperatura");
-            temperatura = parseInt(temperatura);
-        } while (isNaN(temperatura) || temperatura < -30 || temperatura > 30);
+   promedioPesoProd = acumuladorDePeso / ContadorDePesos;
 
-        respuesta = confirm("desea continuar ingresando datos?");
-
-        //punto A
-        if (temperatura % 2 == 0) {
-            CantTempPares ++;
-        }
-
-        //punto B y F
-        if (bandera) {
-            bandera  = false;
-            pesoMax = peso;
-            pesoMin = peso;
-            marcaMax = marca;
-        } else {
-            if (peso < pesoMin) {
-                pesoMin = peso;
-            }
-
-            if (peso > pesoMax) {
-                pesoMax = peso;
-                marcaMax = marca;
-            }
-
-        }
-
-        //punto C
-        if (temperatura < 0) {
-            CantDeProdBajoCero ++;
-        }
-
-        //punto D
-
-        if (peso != 0) {
-            CantPeso ++
-            acumuladorPeso += peso;
-        }
+   document.write("la cantidad de temperaturas pares es " + tempPar + "<br>" );
+   document.write("La marca del producto mas pesado es " + pesoDeMarca + "<br>");
+   document.write("La cantidad de productos a menos de cero grados es" + productosACero + "<br>");
+   document.write("El promedio de peso de los productos es " + promedioPesoProd + "<br>");
+   document.write("El peso minimo es " + pesoMinimo + "el peso maximo es " + pesoMaximo + "<br>");
 
 
 
-    } while (respuesta);
 
-    promedioPeso = acumuladorPeso / CantPeso;
-
-    document.write("La cantidad de Temperaturas pares son: " + CantTempPares + "<br>");
-    document.write("La marca del producto mas pesado es: " + marcaMax + "<br>");
-    document.write("La cantidad de productos que se conservan a menos de 0 grados son: " + CantDeProdBajoCero + "<br>");
-    document.write("El promedio de los pesos es: " + promedioPeso + "<br>");
-    document.write("El peso minimo es: " + pesoMin + " y el peso maximo es: " + pesoMax + "<br>");
-    
-    
-    
-    
+}

@@ -8,13 +8,13 @@
 function mostrar()
 {
  var sexo;
-var nota;
-var promedio;
-var contador = 0;
-var contadorvarones = 0;
-var acumuladordenotas = 0;
-var notaminima;
-var sexodenotabaja;
+ var nota;
+ var promedio;
+ var contador = 0;
+ var contadorvarones = 0;
+ var acumuladordenotas = 0;
+ var notaminima;
+ var sexodenotabaja;
 
 
    while (contador < 5){
