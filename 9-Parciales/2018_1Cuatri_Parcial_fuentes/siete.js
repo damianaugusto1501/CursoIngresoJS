@@ -7,61 +7,60 @@
 
 function mostrar()
 {
-    var contador = 0;
-    var nota;
-    var sexo;
-    var acumuladorNotas = 0;
-    var notaMinima;
-    var sexomasbajo;
-    var contadorvarones = 0;
-    var promedio;
-    var primeravez = true;
+   var contador = 0;
+   var sexo;
+   var notaalumno;
+   var promedionotas;
+   var bandera = true;
+   var notamasbaja;
+   var sexonotamasbaja;
+   var acumuladornotas = 0;
+   var contadornotas = 0;
+   var varonesaprobados = 0;
 
 
-    while(contador < 5){
-  
-        do {
-        
-        nota = prompt("Ingrese nota del alumno");
-        nota = parseInt(nota);
-       
+  while(contador < 5) {
+      
+    do { 
+        notaalumno = prompt("ingrese nota del alumno");
+        notaalumno = parseInt(notaalumno);
 
-        }while(isNaN(nota) || nota <0 || nota >10);
+    }while(isNaN(notaalumno) || notaalumno < 0 || notaalumno > 10);
 
-                do {
-                    sexo = prompt("Ingrese sexo del alumno");
-                }while(sexo.toLowerCase() != "f" && sexo.toLowerCase() != "m"); // validaciones
+    do {
+        sexo = prompt("ingrese genero del alumno");
 
-                contador ++;
+    }while(!isNaN(sexo) || sexo.toLowerCase() != "f" && sexo.toLowerCase() != "m");
 
-                acumuladorNotas += nota;
-                promedio = acumuladorNotas / contador; // punto A
-
-        if (primeravez){
-            primeravez = false;
-            notaMinima = nota;
-            sexomasbajo = sexo; // bandera 
-        }
-
-                        else if (nota < notaMinima) {
-                            notaMinima = nota;
-                            sexomasbajo = sexo;  // punto B
-                        }
-                        
-
-        if (nota >= 6 && sexo == "m") {   
-            contadorvarones ++; // punto C
-
-        }
-              
-
+    if (bandera) {
+        notamasbaja = notaalumno;
+        sexonotamasbaja = sexo;
+        bandera = false;
 
     }
-    alert("El promedio de las notas es " + promedio);
-    alert("la nota mas baja es " + notaMinima + " y pertenece a un " + sexomasbajo);
-    alert("la cantidad de varones aprobados con 6 o mas es " + contadorvarones);
-    
 
+    if (notaalumno >= 0) {
+        contadornotas ++;
+        acumuladornotas += notaalumno;
+    }
+
+    if (notaalumno < notamasbaja) {
+        notamasbaja = notaalumno;
+        sexonotamasbaja = sexo;
+    }
+
+    if (notaalumno >= 6){
+        varonesaprobados ++;
+    }
+
+    promedionotas = acumuladornotas / contadornotas;
+
+    contador ++;
+  }
+
+  alert("el promedio de notas totales es " + promedionotas);
+  alert("la nota mas baja es " + notamasbaja + " y el genero de la persona es " + sexonotamasbaja);
+  alert("la cantidad de varones aprobados con 6 o mas " + varonesaprobados);
 
     }
 

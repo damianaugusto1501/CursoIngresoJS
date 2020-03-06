@@ -7,84 +7,128 @@ function mostrar()
 //d) El promedio del peso de todos los productos.
 //f) El peso máximo y el mínimo.
 
-{ 
-   
- var respuesta;
- var marca;
- var peso;
- var acumuladorDePeso = 0;
- var ContadorDePesos = 0;
- var temperatura ;
- var tempPar = 0 ;
- var primeravez = true;
- var pesoDeMarca;
- var pesoMinimo;
- var pesoMaximo;
- var productosACero = 0;
- var promedioPesoProd;
- 
+// nombre del huesped
+// cant de personas
+// cantidad de dias de estadia
+// forma de pago(efect , tarjeta o QR)
+// informar que huesped trajo mas personas en una sola reserva
+// la cantidad de personas que se quedaron mas dias
+// la forma de pago mas utilizada
+// el promedio de cantidad de dias por reserva
+
+{
 
 
+var Pregunta = true;
+var NombreHuesped;
+var CantidadPersonas;
+var AcumuladorPersonas = 0;
+var ContadorPersonas = 0;
+var MaximoDePersonasReservadas;
+var CantDiasEstadia;
+var MaximosDiasEstadia;
+var contadorMasDias = 0;
+var AcumuladorDiasReserva = 0;
+var ContadorDiasReserva = 0; 
+var FormaDePago;
+var HuespedMasPopular;
+var EfectivoEleccion = 0;
+var TarjetaEleccion = 0;
+var QREleccion = 0;
+var PersonasConMasDias;
+var PromedioDiasDeReserva;
+var FormaDePagoMasUtilizada;
+var Flag = true;
 
- do {     
-     do {
-         peso =prompt("ingrese un peso entre 1 y 100");
-         peso =parseInt(peso);
-      
-        }while(isNaN(peso) ||peso <1 || peso >100);
+while(Pregunta){
+    do{
+        NombreHuesped = prompt("Ingrese Nombre de huesped");
+    }while(!isNaN(NombreHuesped) || NombreHuesped == "");
+    
+    do{
+        CantidadPersonas = prompt("Ingrese Cantidad de personas");
+        CantidadPersonas = parseInt(CantidadPersonas);
 
+    }while(isNaN(CantidadPersonas) || CantidadPersonas == "" || CantidadPersonas <= 0) ;
 
-     do {
-         temperatura = prompt("ingrese temperatura entre -30 y 30");
-         
-         
-        }while (isNaN(temperatura) || temperatura < -30 || temperatura > 30);
+    do{
+        CantDiasEstadia = prompt("Ingrese Cantidad de dias de estadia");
+        CantDiasEstadia = parseInt(CantDiasEstadia);
 
-         do {
-             marca = prompt("ingrese la marca porfavor");
-            }while (!isNaN(marca || marca == ""));
+    }while(isNaN(CantDiasEstadia) || CantDiasEstadia == "" || CantDiasEstadia <= 0);
 
-            if (temperatura % 2 == 0){
-                tempPar ++;
-            }
-            if (peso > 0){
-                acumuladorDePeso += peso;
-                ContadorDePesos ++;
-            }
+    do{
+        FormaDePago = prompt("Ingrese su forma de pago (efectivo , tarjeta o qr ");
+    }while(!isNaN(FormaDePago) || FormaDePago != "efectivo" && FormaDePago.toLowerCase() != "tarjeta" && FormaDePago.toLowerCase() != "qr");
 
-            if (primeravez){
-                primeravez = false;
-                pesoMaximo = peso;
-                pesoMinimo = peso;
-                pesoDeMarca = marca;
+    if (CantidadPersonas > 0) {
+        AcumuladorPersonas += CantidadPersonas;
+        ContadorPersonas ++;
+        
+      }
 
-            } if(peso > pesoMaximo){
-                pesoMaximo = peso;
-                pesoDeMarca = marca;
+      if (CantDiasEstadia > 0) {
+          AcumuladorDiasReserva += CantDiasEstadia;
+          ContadorDiasReserva ++;
+          PromedioDiasDeReserva = AcumuladorDiasReserva / ContadorDiasReserva;
+      }
 
-            } else if(peso < pesoMinimo){
-                    pesoMinimo = peso;
-                }
-            
-                if (temperatura < 0){
-                productosACero ++;
+      if (Flag){
+        HuespedMasPopular = NombreHuesped;
+        MaximoDePersonasReservadas = CantidadPersonas;
+        FormaDePagoMasUtilizada = FormaDePago;
+        contadorMasDias = CantDiasEstadia;
+        Flag = false;
+    }
 
-            }
+    if (CantidadPersonas > MaximoDePersonasReservadas){
+        HuespedMasPopular = NombreHuesped;
+    }
 
-            
-     respuesta = confirm("desea agregar mas?");
+    if (CantDiasEstadia > contadorMasDias){
+        contadorMasDias = CantidadPersonas;
+    }
+    
+    if (FormaDePago == "efectivo"){
+        EfectivoEleccion ++;
+    } else if (FormaDePago == "tarjeta"){
+        TarjetaEleccion ++;
+    } else {
+        QREleccion ++;
+    }
 
-   } while (respuesta == true);
+    if (EfectivoEleccion > TarjetaEleccion){
+        EfectivoEleccion ++;
+        FormaDePagoMasUtilizada = "efectivo";
+    
+    } else if (EfectivoEleccion > QREleccion){
+        EfectivoEleccion ++;
+        FormaDePagoMasUtilizada = "efectivo";
+    }
 
-   promedioPesoProd = acumuladorDePeso / ContadorDePesos;
+    if (TarjetaEleccion > EfectivoEleccion){
+        TarjetaEleccion ++;
+        FormaDePagoMasUtilizada = "tarjeta";
+    } else if(TarjetaEleccion > QREleccion){
+        TarjetaEleccion ++;
+        FormaDePagoMasUtilizada = "tarjeta";
+    }
+    
+    if(QREleccion > EfectivoEleccion){
+        QREleccion ++;
+        FormaDePagoMasUtilizada = "QR";
+    } else if(QREleccion > TarjetaEleccion){
+        QREleccion ++;
+        FormaDePagoMasUtilizada = "QR";
+    }
+    
+    Pregunta = confirm("Desea continuar ingresando datos?");
+}
 
-   document.write("la cantidad de temperaturas pares es " + tempPar + "<br>" );
-   document.write("La marca del producto mas pesado es " + pesoDeMarca + "<br>");
-   document.write("La cantidad de productos a menos de cero grados es" + productosACero + "<br>");
-   document.write("El promedio de peso de los productos es " + promedioPesoProd + "<br>");
-   document.write("El peso minimo es " + pesoMinimo + "el peso maximo es " + pesoMaximo + "<br>");
-
-
-
+document.write("el huesped que trajo mas personas fue " + HuespedMasPopular + "<br>");
+document.write("la cantidad de personas con mas dias de reserva es " + CantidadPersonas + "<br>");
+document.write("la forma de pago mas utilizada fue " + FormaDePagoMasUtilizada + "<br>");
+document.write("el promedio de dias de reserva fue " + PromedioDiasDeReserva + "<br>");
 
 }
+
