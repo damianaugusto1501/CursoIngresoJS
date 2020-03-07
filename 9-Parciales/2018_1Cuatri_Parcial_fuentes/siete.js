@@ -24,7 +24,6 @@ function mostrar()
     var AcumuladorUnidadesAlcohol =0;
 
     var BarbijoMasCaro;
-    var CantUnidadesBarbijosCaros;
     var FabricanteBarbijosCaros; // punto a variables
        
    
@@ -67,56 +66,47 @@ function mostrar()
             BarbijoMasCaro = precio;
             BarbijoContador ++;
             AcumuladorUnidadesBarbijo += CantUnidades;
-            AcumuladorUnidadesBarbijo = parseInt(AcumuladorUnidadesBarbijo);
             FabricanteBarbijosCaros = Fabricante;
 
         } else if (productoTipo == "alcohol"){
             AlcoholContador ++;
             AcumuladorUnidadesAlcohol += CantUnidades;
-            AcumuladorUnidadesAlcohol = parseInt(AcumuladorUnidadesAlcohol);
 
         }else{
             JabonContador ++;
             AcumuladorUnidadesJabon += CantUnidades;
-            AcumuladorUnidadesJabon = parseInt(AcumuladorUnidadesJabon);
         }
 
-        if (precio > BarbijoMasCaro && productoTipo == "barbijo"){
+
+
+        if (productoTipo == "barbijo" && precio > BarbijoMasCaro){
             BarbijoMasCaro = precio; // punto a
             FabricanteBarbijosCaros = Fabricante;
         }
 
-        if (BarbijoContador > JabonContador){
+        if ( AcumuladorUnidadesBarbijo > AcumuladorUnidadesJabon && AcumuladorUnidadesBarbijo > AcumuladorUnidadesAlcohol){
             ArticuloMascomprado = "barbijo";
             CantidadArticuloMascomprado = AcumuladorUnidadesBarbijo;
             FabricanteArticuloMasComprado = Fabricante;
-            
-        } else if (BarbijoContador > AlcoholContador){
-            ArticuloMascomprado = "barbijo";
-            CantidadArticuloMascomprado = AcumuladorUnidadesBarbijo;
-            FabricanteArticuloMasComprado = Fabricante;
-            
-        }
 
-        if (JabonContador > AlcoholContador){
-            ArticuloMascomprado = "jabon"; // devuelvo strings para punto c
-            CantidadArticuloMascomprado = AcumuladorUnidadesJabon;
-            FabricanteArticuloMasComprado = Fabricante;
-        } else if (JabonContador > BarbijoContador){
-            ArticuloMascomprado = "jabon";
-            CantidadArticuloMascomprado = AcumuladorUnidadesJabon;
-            FabricanteArticuloMasComprado = Fabricante;
         }
+           
 
-        if (AlcoholContador > BarbijoContador){
-            ArticuloMascomprado = "alcohol";
-            CantidadArticuloMascomprado = AcumuladorUnidadesAlcohol;
-            FabricanteArticuloMasComprado = Fabricante;
-        } else if (AlcoholContador > JabonContador){
-            ArticuloMascomprado = "alcohol";
-            CantidadArticuloMascomprado = AcumuladorUnidadesAlcohol;
-            FabricanteArticuloMasComprado = Fabricante;
-        }
+    if (AcumuladorUnidadesAlcohol > AcumuladorUnidadesBarbijo && AcumuladorUnidadesAlcohol > AcumuladorUnidadesJabon){
+
+                    ArticuloMascomprado = "jabon"; // devuelvo strings para punto c
+                    CantidadArticuloMascomprado = AcumuladorUnidadesJabon;
+                    FabricanteArticuloMasComprado = Fabricante;
+                }
+           
+
+     if (AcumuladorUnidadesJabon > AcumuladorUnidadesAlcohol && AcumuladorUnidadesJabon > AcumuladorUnidadesBarbijo){
+                ArticuloMascomprado = "alcohol";
+                CantidadArticuloMascomprado = AcumuladorUnidadesAlcohol;
+                FabricanteArticuloMasComprado = Fabricante;
+            }
+           
+       
 
         pregunta = confirm("continua");
     }
@@ -124,17 +114,4 @@ function mostrar()
     alert("el barbijo mas caro fue " + BarbijoMasCaro + " su cantidad de unidades " + AcumuladorUnidadesBarbijo + " y el fabricante " + FabricanteBarbijosCaros);
     alert("el producto mas comprado fue : " + ArticuloMascomprado + " su cant de unidades : " +CantidadArticuloMascomprado + " y el fabricante del articulo mas comprado :" +  FabricanteArticuloMasComprado );
     alert("se vendieron : " + AcumuladorUnidadesJabon + "unidades de jabon" ); 
-    
-    // usar document write para testeo de alerts , con el alert te olvidas despues xd
-
-
- }
- //while de 5
-//validar tipo barbijo jabon alcohol
-//precio validar entre 100 y 300
-//cantidad de unidades entre 0 y 1000
-//la marca y el fabricante
-//del mas caro de los barbijos , la cantidad de unidades y el fabricante
-//del item con mas unidades , el fabricante
-//cuantas unidades de jabon hay en total
-
+}
