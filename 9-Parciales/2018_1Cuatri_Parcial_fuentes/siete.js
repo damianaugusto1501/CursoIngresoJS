@@ -62,20 +62,24 @@ function mostrar()
         }while(Fabricante == "");
         
         
-        if (productoTipo == "barbijo"){
-            BarbijoMasCaro = precio;
-            BarbijoContador ++;
-            AcumuladorUnidadesBarbijo += CantUnidades;
-            FabricanteBarbijosCaros = Fabricante;
+       switch(productoTipo) {
+           case "barbijo":
+                BarbijoMasCaro = precio;
+                BarbijoContador ++;
+                AcumuladorUnidadesBarbijo += CantUnidades;
+                FabricanteBarbijosCaros = Fabricante;
+                break;
+            case "alcohol":
+                    AlcoholContador ++;
+                    AcumuladorUnidadesAlcohol += CantUnidades;
+                break;
+            case "jabon":
+                    AcumuladorUnidadesJabon += CantUnidades;
+                    break;
+                default:
+                break;
 
-        } else if (productoTipo == "alcohol"){
-            AlcoholContador ++;
-            AcumuladorUnidadesAlcohol += CantUnidades;
-
-        }else{
-            JabonContador ++;
-            AcumuladorUnidadesJabon += CantUnidades;
-        }
+       }
 
 
 
